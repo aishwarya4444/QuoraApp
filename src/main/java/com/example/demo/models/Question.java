@@ -1,0 +1,39 @@
+package com.example.demo.models;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.annotation.Id;
+
+import lombok.Builder;
+import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.LocalDateTime;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Document(collection = "questions")
+public class Question {
+    @Id
+    private String id;
+
+    @NotBlank(message = "Title is required")
+    @Size(min = 10, max = 100, message = "Title must be between 10 and 100 characters")
+    private String title;
+
+    @NotBlank(message = "Content is required")
+    @Size(min = 10, max = 100, message = "Content must be between 10 and 100 characters")
+    private String content;
+
+
+    private String authorId;
+
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
+}
