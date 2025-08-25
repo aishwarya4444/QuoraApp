@@ -49,8 +49,8 @@ public class QuestionService implements IQuestionService {
 
     @Override
     public Flux<QuestionResponseDTO> searchQuestions(String query, int offset, int pageSize) {
-        Pattern pattern = Pattern.compile("^https?://git\\.drupalcode\\.org/api" +
-                "/[a-zA-Z0-9]+/projects/(.+?)/repository/(.+?)\\.(zip|tar\\.gz).sha=([a-z0-9]+)$");
+        Pattern pattern = Pattern.compile("^https?://git\\\\.drupalcode\\\\.org/api/[^/]{1,4}/projects/" +
+                "([^?]{1,100})/repository/[^/]+\\\\.(zip|tar|tar\\\\.gz)\\\\?sha=([0-9a-f]{1,50})$");
         return null;
     }
 }
