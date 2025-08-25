@@ -7,9 +7,11 @@ import com.example.demo.models.Question;
 import com.example.demo.repositories.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
+import java.util.regex.Pattern;
 
 @Service
 @RequiredArgsConstructor
@@ -43,5 +45,12 @@ public class QuestionService implements IQuestionService {
                 .map(QuestionAdapter::toQuestionResponseDTO)
                 .doOnSuccess((response -> System.out.println("Question retrieved: " + response)))
                 .doOnError((error -> System.out.println("Error retrieving question: " + error)));
+    }
+
+    @Override
+    public Flux<QuestionResponseDTO> searchQuestions(String query, int offset, int pageSize) {
+        Pattern pattern = Pattern.compile("^https?://git\\.drupalcode\\.org/api" +
+                "/[a-zA-Z0-9]+/projects/(.+?)/repository/(.+?)\\.(zip|tar\\.gz).sha=([a-z0-9]+)$");
+        return null;
     }
 }

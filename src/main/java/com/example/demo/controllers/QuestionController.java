@@ -5,6 +5,7 @@ import com.example.demo.dto.QuestionResponseDTO;
 import com.example.demo.services.IQuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -23,5 +24,15 @@ public class QuestionController {
     @GetMapping("/{id}")
     public Mono<QuestionResponseDTO> getQuestion(@PathVariable String id) {
         return questionService.getQuestion(id);
+    }
+
+    @GetMapping("/search")
+    public Flux<QuestionResponseDTO> searchQuestions(
+            @RequestParam String query,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        // Implement search logic here
+        return Flux.empty(); // Placeholder
     }
 }
